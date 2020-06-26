@@ -1,0 +1,64 @@
+﻿@page
+@model BooklistRazor.Pages.Booklist.IndexModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container row">
+    <div class="col-9">
+        <h3 class="text-info">Available books</h3>
+    </div>
+    <div class="col-3">
+        <a asp-page="Create" class="btn btn-info text-white float-right">Add Book</a>
+    </div>
+
+    <div class="col-12 p-3 mt-3 ">
+        <form method="post">
+            @if (Model.books.Count() > 0)
+            {
+                <table class="table">
+
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>
+                                <label asp-for="books.FirstOrDefault().Name"></label>
+                            </th>
+                            <th>
+                                <label asp-for="books.FirstOrDefault().Author"></label>
+                            </th>
+                            <th>
+                                <label asp-for="books.FirstOrDefault().ISBN"></label>
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var book in Model.books)
+                        {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(m => book.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => book.Author)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => book.ISBN)
+                            </td>
+                            <td class="float-right">
+                                <a class="btn btn-sm btn-warning text-white">Edit</a>
+                                <button class="btn btn-sm btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+
+            }
+            else
+            {
+                <p class="border rounded">No books available</p>
+            }
+        </form>
+    </div>
+</div>
